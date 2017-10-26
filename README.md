@@ -1,13 +1,24 @@
 # Artificial Intelligence Nanodegree
 ## Introductory Project: Diagonal Sudoku Solver
 
+<img src=images/sudoku-board-bare.jpg>
+
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+
+A: Constraint Propagation is the repeated application of the same rules, until any further refinement is not possible. With naked twins, the idea is to identify a pair/s of boxes belonging to the same set of peers, where the pairs have the same 2 numbers as their possible solutions.
+
+<img src=images/naked-twins.png>
+
+To do this we have to eliminate the particular common solution from every other peer that is not in the naked_twin pair.
+
+<img src=images/naked-twins-2.png>
+
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+
+A: *By including it as an additional way of counting units along the upper and lower diagonals, in addition to the (2) orthogonal and the sub-square units. Once done, all diagonal entries will have corresponding diagonal peers*
 
 ### Install
 
