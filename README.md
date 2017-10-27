@@ -14,11 +14,15 @@ To do this we have to eliminate the particular common solution from every other 
 
 <img src=images/naked-twins-2.png>
 
+<img src=images/naked-twins-code.png>
+
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
 
 A: *By including it as an additional way of counting units along the upper and lower diagonals, in addition to the (2) orthogonal and the sub-square units. Once done, all diagonal entries will have corresponding diagonal peers*
+
+<img src=images/diagunits.png>
 
 ### Install
 
