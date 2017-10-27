@@ -28,44 +28,29 @@ def naked_twins(values):
     # Find all instances of naked twins
     '''
     nakedunits = row_units + column_units + square_units
-
+    # get all candidates for naked twins.
     boxlist = [boxtry for boxtry in values.keys() if len(values[boxtry]) == 2]
+    # filter canadidates, such that they form maked twins.
+    nakedtwins = {(box1, box2) for box1 in boxlist for box2 in peers[box1] if set(values[box1]) == set(values[box2])}
 
-    #print("\n Candidates for NKEDTWIN Boxes are: ", boxlist)
+    # ALGO/DEBUG
+    # print("\n Candidates for NKEDTWIN Boxes are: ",boxlist)
+    # print("\n REAL Candidates for NKEDTWIN Boxes are: ",nakedtwins)
 
-    temp = dict()
+    # finding waldo.
+    for pairs in nakedtwins:
+        peerX = peers[pairs[0]]
+        peerY = peers[pairs[1]]
+        # intersection for common peers
+        peerNET = (peerX & peerY).difference(x for x in pairs)
+        # print("\n\n PEERNET: ",peerNET, "\n PAIRS:" ,pairs) #ALGO/DEBUG
+        for peer in peerNET:
+            # deletion at len of str > 1, (or 2?)
+            if len(values[peer]) > 2:
+                for VAL in str(values[pairs[0]]):
+                    if VAL in str(values[peer]):
+                        values = assign_value(values, peer, values[peer].replace(VAL, ''))
 
-    for box1 in boxlist:
-        for box2 in boxlist:
-            if values[box1] == values[box2] and not box1 == box2:
-                if box1 not in [x for b in temp.keys() for x in b]:
-                    for UNITX in nakedunits:
-                        # print("\nBOXPAIRS: ",[box1,box2],"\nUNITX: ",UNITX)
-                        count = 0
-                        for testbox in [box1, box2]:
-                            if testbox in UNITX:
-                                count += 1
-                                if count == 2:
-                                    # print("\nBOXPAIRS: ",[box1,box2],"ADDED")
-                                    temp[(box1, box2,)] = values[box1]
-
-    #print("\n verifed pairs: ", temp)
-    for UNITX in nakedunits:
-        for pairbox in temp.keys():
-            count = 0
-            for box0 in pairbox:
-                if box0 in UNITX:
-                    count += 1
-                    if count == 2:
-                        for boxtry in UNITX:
-                            if len(values[boxtry]) > 2:
-                                # print("\n current box: ",values[boxtry])
-                                for NUM in str(values[box0]):
-                                    # print("NUM: ", NUM)
-                                    XSTR = values[boxtry].replace(NUM, "")
-                                    # print("\n XSTR is: ", XSTR, "NUM: ", NUM)
-                                    values = assign_value(values, boxtry, XSTR)
-                                    # print("\n current box after: ",values[boxtry])
     return values
 
 def cross(a, b):
