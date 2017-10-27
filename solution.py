@@ -6,8 +6,7 @@ https://github.com/udacity/aind-sudoku
 
 '''
 
-# TODO: cleanup the code, and try a oop-modular solution
-# TODO: w/o N-Dim Tree/Datastructure, engineeered.
+#Todo: udacity-pa passing
 
 assignments = []
 
