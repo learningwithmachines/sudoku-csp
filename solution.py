@@ -28,10 +28,13 @@ def naked_twins(values):
     # Find all instances of naked twins
     '''
     nakedunits = row_units + column_units + square_units
+    unitNKD = dict((s, [u for u in nakedunits if s in u]) for s in boxes)
+    NKDpeers = dict((s, set(sum(unitNKD[s], [])) - set([s])) for s in boxes)
+
     # get all candidates for naked twins.
     boxlist = [boxtry for boxtry in values.keys() if len(values[boxtry]) == 2]
     # filter canadidates, such that they form maked twins.
-    nakedtwins = {(box1, box2) for box1 in boxlist for box2 in peers[box1] if set(values[box1]) == set(values[box2])}
+    nakedtwins = {(box1, box2) for box1 in boxlist for box2 in NKDpeers[box1] if set(values[box1]) == set(values[box2])}
 
     # ALGO/DEBUG
     # print("\n Candidates for NKEDTWIN Boxes are: ",boxlist)
@@ -39,8 +42,8 @@ def naked_twins(values):
 
     # finding waldo.
     for pairs in nakedtwins:
-        peerX = peers[pairs[0]]
-        peerY = peers[pairs[1]]
+        peerX = NKDpeers[pairs[0]]
+        peerY = NKDpeers[pairs[1]]
         # intersection for common peers
         peerNET = (peerX & peerY).difference(x for x in pairs)
         # print("\n\n PEERNET: ",peerNET, "\n PAIRS:" ,pairs) #ALGO/DEBUG
