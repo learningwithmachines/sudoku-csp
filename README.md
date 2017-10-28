@@ -1,29 +1,33 @@
-# Artificial Intelligence Nanodegree
-## Introductory Project: Diagonal Sudoku Solver
+###Artificial Intelligence Nanodegree
 
-<img src=images/sudoku-board-bare.jpg>
+---
+####Introductory Project: Diagonal Sudoku Solver
 
-# Question 1 (Naked Twins)
-Q: How do we use constraint propagation to solve the naked twins problem?  
+---
+    <img src=images/sudoku-board-bare.jpg>
 
-A: Constraint Propagation is the repeated application of the same rules, until any further refinement is not possible. With naked twins, the idea is to identify a pair/s of boxes belonging to the same set of peers, where the pairs have the same 2 numbers as their possible solutions.
+###Question 1 (Naked Twins)
 
-<img src=images/naked-twins.png>
+Q: How do we use constraint propagation to solve the naked twins problem? 
+A: Constraint Propagation is the repeated application of the same set of rules in order to minimize the solution space, until any further refinement is not possible/feasible. 
+    
+   With naked twins, the idea is to identify pair/s of boxes belonging to the same set of sudoku peers, such that the offending pairs have the same 2 numbers within their possible solutions.
 
-To do this we have to eliminate the particular common solution from every other peer that is not in the naked_twin pair.
+    <img src=images/naked-twins.png>
+    
+   To do this we have to eliminate the common solution found in our naked_twin_pair from every other peer that is not in the naked_twin_pair, and has more possible solutions than our chosen pair.
+    
+    <img src=images/naked-twins-2.png>
+    <img src=images/naked-twins-code.png>
+    
+###Question 2 (Diagonal Sudoku)
 
-<img src=images/naked-twins-2.png>
+Q: How do we use constraint propagation to solve the diagonal sudoku problem? 
 
-<img src=images/naked-twins-code.png>
+A: By including it as an additional way of counting units/peer space. Once done, all diagonal entries will have their corresponding diagonal peers. 
+   Essentially making it behave similarly to the pre-existing Cartesian/Latin-Square Grid, by making it's own diagonal grid with *diagonal* rules.
 
-
-# Question 2 (Diagonal Sudoku)
-Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-
-A: *By including it as an additional way of counting units along the upper and lower diagonals, in addition to the (2) orthogonal and the sub-square units. Once done, all diagonal entries will have corresponding diagonal peers*
-
-<img src=images/diagunits.png>
-
+    <img src=images/diagunits.png>
 ### Install
 
 This project requires **Python 3**.

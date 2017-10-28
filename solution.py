@@ -6,7 +6,7 @@ https://github.com/udacity/aind-sudoku
 
 '''
 
-#Todo: udacity-pa passing
+#Done: udacity-pa passing
 
 assignments = []
 
@@ -37,8 +37,8 @@ def naked_twins(values):
     nakedtwins = {(box1, box2) for box1 in boxlist for box2 in NKDpeers[box1] if set(values[box1]) == set(values[box2])}
 
     # ALGO/DEBUG
-    # print("\n Candidates for NKEDTWIN Boxes are: ",boxlist)
-    # print("\n REAL Candidates for NKEDTWIN Boxes are: ",nakedtwins)
+    #print("\n Candidates for NKEDTWIN Boxes are: ", boxlist)
+    #print("\n REAL Candidates for NKEDTWIN Boxes are: ", nakedtwins)
 
     # finding waldo.
     for pairs in nakedtwins:
@@ -49,7 +49,7 @@ def naked_twins(values):
         # print("\n\n PEERNET: ",peerNET, "\n PAIRS:" ,pairs) #ALGO/DEBUG
         for peer in peerNET:
             # deletion at len of str > 1, (or 2?)
-            if len(values[peer]) > 2:
+            if len(values[peer]) > 1:
                 for VAL in str(values[pairs[0]]):
                     if VAL in str(values[peer]):
                         values = assign_value(values, peer, values[peer].replace(VAL, ''))
@@ -216,9 +216,12 @@ row_units = [cross(r, cols) for r in rows]
 column_units = [cross(rows, c) for c in cols]
 square_units = [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123', '456', '789')]
 reverse_cols = cols[::-1]
-diag1 = [rows[i] + cols[i] for i in range(len(rows))]
-diag2 = [rows[i] + reverse_cols[i] for i in range(len(rows))]
-diag_units = [diag1, diag2]
+
+#diagonals heuristic
+diag_unitsU = [rows[i] + cols[i] for i in range(len(rows))]
+diag_unitsL = [rows[i] + reverse_cols[i] for i in range(len(rows))]
+diag_units = [diag_unitsU, diag_unitsL]
+
 unitlist = row_units + column_units + square_units + diag_units
 units = dict((s, [u for u in unitlist if s in u]) for s in boxes)
 peers = dict((s, set(sum(units[s], [])) - set([s])) for s in boxes)
